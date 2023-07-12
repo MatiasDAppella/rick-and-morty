@@ -1,0 +1,60 @@
+.about {
+    width: 100%;
+    min-height: 800px;
+    background-color: #b4ccb9;
+    box-shadow: 0 10px 20px rgba(128, 128, 128, 0.3);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.imageBox {
+    height: 300px;
+    width: 300px;
+    margin-bottom: 20px;
+    
+    background-image: url('../../assets/morty-face.png');
+    transition: all 0.08s;
+}
+
+.imageBox:hover {
+    background-image: url('../../assets/morty-screaming.png');
+}
+
+.textBox {
+    padding: 10px;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    width: 300px;
+    margin: 0 0 20px 0;
+}
+
+.h1, .h2 {
+    margin: 0;
+}
+
+.iconsBox {
+    display: flex;
+    justify-content: space-evenly;
+    width: 160px;
+    padding: 5px;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+}
+
+.githubIcon, .instagramIcon {
+    height: 50px;
+    width: 50px;
+    margin-top: 5px;
+
+    transition: all 0.3s;
+}
+
+.githubIcon:hover, .instagramIcon:hover {
+    transform: scale(1.1) rotate(2deg);
+    cursor: pointer;
+}

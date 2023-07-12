@@ -1,0 +1,20 @@
+.message {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    padding: 0 25px 0 25px;
+    border: #373737 1px solid;
+    position: absolute;
+    right: 60px;
+    top: 120px;
+    z-index: 99;
+}
+
+.img {
+    height: 100px;
+    width: 100px;
+    margin-top: 20px; 
+}
+
+.h1 {
+    margin: 0 0 10px;
+}

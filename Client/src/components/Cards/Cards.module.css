@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row-reverse;
+    min-height: 800px;
+    background-color: #b4ccb9;
+    box-shadow: 0 10px 20px rgba(128, 128, 128, 0.3);
+    align-items: center;
+    justify-content: center;
+    align-content: flex-end;
+}
