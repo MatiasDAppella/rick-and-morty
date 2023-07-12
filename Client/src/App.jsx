@@ -52,13 +52,14 @@ function App({ removeFav }) {
 
         } else {
 
-        fetch(`https://rickandmortyapi.com/api/character/${id}`)
+        fetch(`http://localhost:3001/rickandmorty/character/${id}`)
             .then(res => res.json())
             .then(res => {
                 console.log(res)
-                if (res.name) setCharacters([...characters, res], 
-                    setAvailableChars(availableChars.filter(e => e !== Number(id))))
-                    
+                if (res.name) {
+                    setCharacters([...characters, res], console.log(characters)) 
+                    setAvailableChars(availableChars.filter(e => e !== Number(id)))
+                }
                 else window.alert('No hay personajes con ese ID!')
             }).catch()
         }
