@@ -1,7 +1,7 @@
 let myFavorites = new Array()
 
 const postFav = (req, res) => {
-    myFavorites.push(req.body)
+    myFavorites.push(req.body[0])
     return res.status(200).send(JSON.stringify(myFavorites))
 };
 
