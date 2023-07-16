@@ -14,18 +14,21 @@ import { removeFav } from './redux/actions'
 function App({ removeFav }) {
     /* -------------------------- Login -------------------------- */
     const navigate = useNavigate()
-    const [access, serAccess] = useState(false)
-    const EMAIL = 'ejemplo@gmail.com'
-    const PASSWORD = 'asd123'
+    const [access, setAccess] = useState(false)
 
     const login = (userData) => {
-        if (userData.password === PASSWORD && userData.email === EMAIL){
-            serAccess(true)
-            navigate('/home')
-        }
+        const { email, password } = userData
+        const URL = "http://localhost:3001/rickandmorty/login/"
+
+        fetch(`${URL}?email=${email}&password=${password}`)
+            .then(res => res.json())
+            .then(data => {
+                setAccess(data.access)
+            }).catch()
     }
 
     useEffect(() => {
+        access && navigate('/home')
         !access && navigate('/')
     }, [access])
     /* -------------------------- Login -------------------------- */

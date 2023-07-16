@@ -5,8 +5,8 @@ const login = (req, res) => {
     const { email, password } = req.query
 
     return (users.some(e => (e.email === email && e.password === password)))
-        ? res.status(200).send([{ "access": true }])
-        : res.status(200).send([{ "access": false }])
+        ? res.status(200).send({ "access": true })
+        : res.status(200).send({ "access": false })
 };
 
 module.exports = {
