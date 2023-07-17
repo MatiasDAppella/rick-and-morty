@@ -9,7 +9,6 @@ export const addFav = (char) => {
             .post(endpoint, char)
             .then(response => response.data)
             .then(data => {
-                console.log(data)
                 return dispatch({
                     type: ADD_FAV,
                     payload: data

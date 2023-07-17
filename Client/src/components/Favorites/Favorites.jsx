@@ -19,7 +19,6 @@ const Favorites = ({ myFavorites, filtered, onClose }) => {
     const handleShowAll = () => {
         setAux({ order: "null", filter: "null" })
         setDisplayedChars(myFavorites)
-        console.log(myFavorites)
     }
 
     const handleOrder = (event) => {
@@ -27,7 +26,6 @@ const Favorites = ({ myFavorites, filtered, onClose }) => {
             setAux(({order: event.target.value, filter: "null"}))
             dispatch(orderCards(event.target.value))
             setDisplayedChars(filtered)
-            console.log(filtered)
         }
     }
 
@@ -36,7 +34,6 @@ const Favorites = ({ myFavorites, filtered, onClose }) => {
             setAux({order: "null", filter: event.target.value})
             dispatch(filterCards(event.target.value))
             setDisplayedChars(filtered)
-            console.log(filtered)
         }
     }
 
