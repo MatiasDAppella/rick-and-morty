@@ -3,7 +3,6 @@ const session = require('supertest');
 const agent = session(app);
 
 const users = require('../src/utils/users');
-const axios = require('axios')
 
 describe("Test de RUTAS", () => {
 
