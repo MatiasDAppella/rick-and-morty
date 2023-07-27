@@ -6,7 +6,7 @@ const { conn } = require('./database');
 
 server.listen(PORT, async () => {
     try {
-      await conn.sync({ force: true });
+      await conn.sync({ force: false });
       console.log('Database connected successfully')
     } catch (error) {
       console.log('ERROR connecting database')

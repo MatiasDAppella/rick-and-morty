@@ -10,6 +10,7 @@ module.exports = (sequelize) => {
     },
     email: {
       type: DataTypes.STRING(50),
+      unique: true,
       allowNull: false
     },
     password: {

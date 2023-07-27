@@ -3,6 +3,11 @@ const morgan = require('morgan');
 const router = require('./routes');
 const server = express();
 
+// Routers
+const loginRouter = require('./routes/loginRouter');
+const charRouter = require('./routes/charRouter');
+const favRouter = require('./routes/favRouter');
+
 server.use(express.json());
 server.use(morgan('dev'));
 server.use((_, res, next) => {
@@ -19,6 +24,9 @@ server.use((_, res, next) => {
     next();
 });
 
-server.use("/rickandmorty", router);
+server.use("/rickandmorty/login", loginRouter);
+server.use("/rickandmorty/character", charRouter);
+server.use("/rickandmorty/fav", favRouter);
+//server.use("/rickandmorty", router);
 
 module.exports = server;

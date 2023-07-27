@@ -3,14 +3,13 @@ const { postFav, deleteFav } = require('../controllers/handleFavorites')
 const { login } = require('../controllers/login')
 const express = require('express')
 
+// Routers
+const loginRouter = require('../routes/loginRouter');
+
 const router = express.Router()
 
 router.get("/character/:id", (req, res) => {
     return getCharacter(req, res)
-});
-
-router.get("/login", (req, res) => {
-    return login(req, res)
 });
 
 router.post("/fav", (req, res) => {

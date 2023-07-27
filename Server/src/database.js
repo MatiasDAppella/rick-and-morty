@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 // Models
-const FavoriteModel = require('./models/Favorite');
+const CharacterModel = require('./models/Character');
 const UserModel = require('./models/User');
 
 // Sequelize instance
@@ -13,17 +13,17 @@ const sequelize = new Sequelize(
 );
 
 // Executed models
-FavoriteModel(sequelize);
+CharacterModel(sequelize);
 UserModel(sequelize);
 
 // Associations
-const { User, Favorite } = sequelize.models;
+const { User, Character } = sequelize.models;
 
 // user_favorite
-User.belongsToMany(Favorite, { through: "user_favorite" });
+User.belongsToMany(Character, { through: "user_favorite" });
+Character.belongsToMany(User, { through: "user_favorite" });
 
 module.exports = {
-  User,
-  Favorite,
+  ...sequelize.models,
   conn: sequelize
 };
