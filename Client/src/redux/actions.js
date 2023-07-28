@@ -1,6 +1,13 @@
 import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR } from "./types";
 import axios from "axios";
 
+export const getAllFavorites = () => {
+    return function(dispatch){
+        
+
+    }
+};
+
 export const addFav = (char) => {
     const endpoint = "http://localhost:3001/rickandmorty/fav"
 
