@@ -1,10 +1,21 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR } from "./types";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR, GET_ALL_FAV } from "./types";
 import axios from "axios";
 
-export const getAllFavorites = () => {
+export const getAllFavorites = (id) => {
+    const endpoint = "http://localhost:3001/rickandmorty/fav/getall"
+    const user = { UserId: id }
+    console.log(user)
+    
     return function(dispatch){
-        
-
+        axios
+            .post(endpoint, user)
+            .then(response => response.data)
+            .then(data => {
+                return dispatch({
+                    type: GET_ALL_FAV,
+                    payload: data
+                })
+            }).catch()
     }
 };
 

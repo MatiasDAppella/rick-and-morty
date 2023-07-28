@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR } from "./types";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR, GET_ALL_FAV } from "./types";
 
 const initialState = {
     filtered: [],
@@ -9,6 +9,12 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
     switch(action.type){
+        case GET_ALL_FAV:
+            return {
+                ...state,
+                myFavorites: action.payload
+            }
+
         case ADD_FAV:
             return {
                 ...state,

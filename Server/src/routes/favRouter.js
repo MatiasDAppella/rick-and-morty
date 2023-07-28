@@ -6,8 +6,9 @@ const favRouter = express.Router()
 const { favController } = require('../controllers/favControllers')
 
 // Path: rickandmorty/fav
-favRouter.get("/", async (req, res) => {
+favRouter.post("/getall", async (req, res) => {
   try {
+    console.log(req.body)
     const { UserId } = req.body;
     const allFavorites = await favController.getAll(UserId)
 

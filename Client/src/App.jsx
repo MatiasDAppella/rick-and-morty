@@ -9,9 +9,9 @@ import Form from './components/Form/Form'
 import Message from './components/Message/Message'
 import Favorites from './components/Favorites/Favorites'
 import { connect } from 'react-redux'
-import { addCharacter, logUser, removeCharacter, removeFav } from './redux/actions'
+import { addCharacter, getAllFavorites, logUser, removeCharacter, removeFav } from './redux/actions'
 
-function App({loggedUser, logUser, addCharacter, removeCharacter }) {
+function App({loggedUser, logUser, addCharacter, removeCharacter, getAllFavorites }) {
 
     /* -------------------------- Login -------------------------- */
     const navigate = useNavigate()
@@ -29,9 +29,11 @@ function App({loggedUser, logUser, addCharacter, removeCharacter }) {
     }
 
     useEffect(() => {
-        if (loggedUser !== "") navigate('/home')
+        if (loggedUser !== ""){
+            getAllFavorites(loggedUser)
+            navigate('/home')
+        }
         else navigate('/')
-        console.log(loggedUser)
     }, [loggedUser])
     
     
@@ -102,7 +104,8 @@ const mapDispatchToProps = (dispatch) => {
         removeFav: (id) => dispatch(removeFav(id)),
         logUser: (id) => dispatch(logUser(id)),
         addCharacter: (id) => dispatch(addCharacter(id)),
-        removeCharacter: (id) => dispatch(removeCharacter(id))
+        removeCharacter: (id) => dispatch(removeCharacter(id)),
+        getAllFavorites: (id) => dispatch(getAllFavorites(id))
     }
 };
 
