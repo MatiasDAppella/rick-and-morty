@@ -9,12 +9,12 @@ import Form from './components/Form/Form'
 import Message from './components/Message/Message'
 import Favorites from './components/Favorites/Favorites'
 import { connect } from 'react-redux'
-import { removeFav } from './redux/actions'
+import { addCharacter, logUser, removeCharacter, removeFav } from './redux/actions'
 
-function App({ removeFav }) {
+function App({loggedUser, logUser, addCharacter, removeCharacter }) {
+
     /* -------------------------- Login -------------------------- */
     const navigate = useNavigate()
-    const [access, setAccess] = useState(false)
 
     const login = (userData) => {
         const { email, password } = userData
@@ -23,17 +23,19 @@ function App({ removeFav }) {
         fetch(`${URL}?email=${email}&password=${password}`)
             .then(res => res.json())
             .then(data => {
-                setAccess(data.access)
+                if (data.error) console.log(data.error)
+                else logUser(data.id)
             }).catch()
     }
 
     useEffect(() => {
-        access && navigate('/home')
-        !access && navigate('/')
-    }, [access])
-    /* -------------------------- Login -------------------------- */
-
-    const [characters, setCharacters] = useState([])
+        if (loggedUser !== "") navigate('/home')
+        else navigate('/')
+        console.log(loggedUser)
+    }, [loggedUser])
+    
+    
+    /* ---------------------- Chars in api ----------------------- */
     const [availableChars, setAvailableChars] = useState([])
     const [repeated, setRepeated] = useState(false)
 
@@ -48,23 +50,14 @@ function App({ removeFav }) {
             .catch()
     }, [])
 
+
+    /* ----------------------- Functions ------------------------ */
     const onSearch = (id) => {
         // no cards repeated
         if (!availableChars.includes(Number(id))){
             setRepeated(true)
-
-        } else {
-
-        fetch(`http://localhost:3001/rickandmorty/character/${id}`)
-            .then(res => res.json())
-            .then(res => {
-                if (res.name) {
-                    setCharacters([...characters, res]) 
-                    setAvailableChars(availableChars.filter(e => e !== Number(id)))
-                }
-                else window.alert('No hay personajes con ese ID!')
-            }).catch()
         }
+        else addCharacter(id)
     }
 
     const getRandomChar = () => {
@@ -73,9 +66,9 @@ function App({ removeFav }) {
     }
 
     const onClose = (id) => {
-        const result = characters.filter(e => e.id !== Number(id))
-        setCharacters(result, setAvailableChars([...availableChars, Number(id)]))
-        removeFav(id)
+        removeCharacter(id)
+        setAvailableChars([...availableChars, Number(id)])
+        // removeFav(id)
     }
 
     return <>
@@ -88,7 +81,7 @@ function App({ removeFav }) {
 
         <Routes>
             <Route path='' element={<Form login={login}/>}/>
-            <Route path='/home' element={<Cards characters={characters} onClose={onClose}/>}/>
+            <Route path='/home' element={<Cards onClose={onClose}/>}/>
             <Route path='/favorites' element={<Favorites onClose={onClose}/>}/>
             <Route path='/detail'><Route path=':id' element={<Detail/>}/></Route>
             <Route path='/about' element={<About/>}/>
@@ -98,13 +91,22 @@ function App({ removeFav }) {
     </>
 };
 
+const mapStateToProps = (state) => {
+  return {
+    loggedUser: state.loggedUser
+}
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeFav: (id) => dispatch(removeFav(id))
+        removeFav: (id) => dispatch(removeFav(id)),
+        logUser: (id) => dispatch(logUser(id)),
+        addCharacter: (id) => dispatch(addCharacter(id)),
+        removeCharacter: (id) => dispatch(removeCharacter(id))
     }
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(App)

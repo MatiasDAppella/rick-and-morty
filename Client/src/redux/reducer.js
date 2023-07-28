@@ -1,8 +1,10 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./types";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR } from "./types";
 
 const initialState = {
     filtered: [],
-    myFavorites: []
+    myFavorites: [],
+    characters: [],
+    loggedUser: ""
 }
 
 export const reducer = (state = initialState, action) => {
@@ -30,12 +32,29 @@ export const reducer = (state = initialState, action) => {
             return action.payload === "A" ? {             /* Ascendente */
                 ...state,
                 filtered: [...state.myFavorites.sort((a, b) => a.id - b.id)]
-
             } : {                                       /* Descendiente */
                 ...state,
                 filtered: [...state.myFavorites.sort((a, b) => b.id - a.id)]
-
             }
+
+        case LOG_USER:
+            return {
+                ...state,
+                loggedUser: action.payload
+            }
+
+        case ADD_CHAR:
+            return {
+                ...state,
+                characters: [...state.characters, action.payload]
+            }
+
+        case REMOVE_CHAR: {
+            return {
+                ...state,
+                characters: [...state.characters.filter(char => char.id !== action.payload)]
+            }
+        }
 
         default:
             return { ...state }

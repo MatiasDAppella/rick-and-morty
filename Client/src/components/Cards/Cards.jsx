@@ -1,11 +1,15 @@
 import style from './Cards.module.css'
 import Card from './Card/Card'
 
-const Cards = ({ characters, onClose }) => {
-    
+// Hooks
+import { useSelector } from 'react-redux'
+
+const Cards = ({ onClose }) => {
+    const characters = useSelector((state) => state.characters)
+
     return <>
         <div className={style.container}>{
-            characters.map(card => 
+            characters?.map(card => 
                 <Card
                     key={card.id}
                     id={card.id}
@@ -13,7 +17,7 @@ const Cards = ({ characters, onClose }) => {
                     status={card.status}
                     species={card.species}
                     gender={card.gender}
-                    origin={card.origin.name}
+                    origin={card.origin}
                     image={card.image}
                     onClose={onClose}
                 ></Card>

@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./types";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR } from "./types";
 import axios from "axios";
 
 export const addFav = (char) => {
@@ -41,4 +41,34 @@ export const filterCards = (gender) => ({
 export const orderCards = (order) => ({
     type: ORDER,
     payload: order
+});
+
+// Log user
+export const logUser = (id) => ({
+    type: LOG_USER,
+    payload: id
+});
+
+// Render characters
+export const addCharacter = (id) => {
+    id = id.toString()
+    const endpoint = "http://localhost:3001/rickandmorty/character/" + id
+
+    return function(dispatch){
+        axios
+            .get(endpoint)
+            .then(response => response.data)
+            .then(data => {
+                console.log(data)
+                return dispatch({
+                    type: ADD_CHAR,
+                    payload: data
+                })
+            }).catch()
+    }
+};
+
+export const removeCharacter = (id) => ({
+    type: REMOVE_CHAR,
+    payload: id
 });
