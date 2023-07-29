@@ -58,8 +58,10 @@ function App({loggedUser, logUser, addCharacter, removeCharacter, getAllFavorite
         // no cards repeated
         if (!availableChars.includes(Number(id))){
             setRepeated(true)
+        } else {
+            addCharacter(id)
+            setAvailableChars(availableChars.filter(e => e !== Number(id)))
         }
-        else addCharacter(id)
     }
 
     const getRandomChar = () => {
