@@ -33,10 +33,10 @@ favRouter.post("/", async (req, res) => {
 
 favRouter.delete("/", async (req, res) => {
   try {
-    const { UserId, CharacterId } = req.body;
-    await favController.delete(UserId, CharacterId)
+    const { user, char } = req.query;
+    const deletedChar = await favController.delete(user, char)
 
-    return res.status(200).send("Personaje eliminado de favoritos")
+    return res.status(200).send(deletedChar)
   } catch (error) {
     
     return res.status(400).send(error.message)

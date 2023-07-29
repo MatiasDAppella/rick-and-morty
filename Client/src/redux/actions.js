@@ -19,12 +19,13 @@ export const getAllFavorites = (id) => {
     }
 };
 
-export const addFav = (char) => {
+export const addFav = (UserId, CharacterId) => {
     const endpoint = "http://localhost:3001/rickandmorty/fav"
+    const user = { UserId, CharacterId }
 
     return function(dispatch){
         axios
-            .post(endpoint, char)
+            .post(endpoint, user)
             .then(response => response.data)
             .then(data => {
                 return dispatch({
@@ -35,17 +36,19 @@ export const addFav = (char) => {
     }
 };
 
-export const removeFav = (id) => {
-    const endpoint = "http://localhost:3001/rickandmorty/fav/" + id;
+export const removeFav = (UserId, CharacterId) => {
+    const endpoint = `http://localhost:3001/rickandmorty/fav?user=${UserId}&char=${CharacterId}`
+    console.log("ENDPOINT:", endpoint)
 
     return function(dispatch){
         axios
             .delete(endpoint)
             .then(response => response.data)
             .then(data => {
+                console.log(data)
                 return dispatch({
                     type: REMOVE_FAV,
-                    payload: data
+                    payload: data.toString()
                 })
             }).catch()
     }
@@ -77,7 +80,6 @@ export const addCharacter = (id) => {
             .get(endpoint)
             .then(response => response.data)
             .then(data => {
-                console.log(data)
                 return dispatch({
                     type: ADD_CHAR,
                     payload: data

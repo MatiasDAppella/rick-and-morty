@@ -17,7 +17,8 @@ const Card = (props) => {
         onClose,
         myFavorites,
         removeFav,
-        addFav
+        addFav,
+        loggedUser
 
     } = props
 
@@ -32,10 +33,10 @@ const Card = (props) => {
     const handleFavorite = () => {
         if (isFav) {
             setIsFav(false)
-            removeFav(id)
+            removeFav(loggedUser, id)
         } else {
             setIsFav(true)
-            addFav(props)
+            addFav(loggedUser, id)
         }
     }
 
@@ -72,14 +73,15 @@ const Card = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        myFavorites: state.myFavorites
+        myFavorites: state.myFavorites,
+        loggedUser: state.loggedUser
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addFav: (props) => dispatch(addFav(props)),
-        removeFav: (id) => dispatch(removeFav(id))
+        addFav: (UserId, CharacterId) => dispatch(addFav(UserId, CharacterId)),
+        removeFav: (UserId, CharacterId) => dispatch(removeFav(UserId, CharacterId))
     }
 };
 

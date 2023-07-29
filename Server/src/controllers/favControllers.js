@@ -25,7 +25,8 @@ class Controller {
     const char = await Character.findByPk(CharacterId);
 
     if (!user||!char) throw new Error('Error en la conexión!');
-    return user.addCharacter(char);
+    user.addCharacter(char);
+    return char
   };
 
   delete = async (UserId, CharacterId) => {
@@ -34,7 +35,8 @@ class Controller {
     const char = await Character.findByPk(CharacterId);
 
     if (!user||!char) throw new Error('Error en la conexión!');
-    return user.removeCharacter(char);
+    user.removeCharacter(char);
+    return char.id
   };
 
 };
