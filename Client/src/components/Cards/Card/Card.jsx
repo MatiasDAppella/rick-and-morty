@@ -50,7 +50,8 @@ const Card = (props) => {
                         <button onClick={handleFavorite} className={style.btnFav}>🤍</button>
                     )
                 }
-                <button className={style.btn} onClick={() => onClose(id)}>x</button>
+                { onClose && <button className={style.btn} onClick={() => onClose(id)}>x</button> }
+                
                 <NavLink className={style.link} to={'/detail/' + id}><img className={style.img} src={image} alt=''/></NavLink>
                 <div className={style.name}>{name}</div>
                 

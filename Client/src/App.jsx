@@ -70,7 +70,6 @@ function App({loggedUser, logUser, addCharacter, removeCharacter, getAllFavorite
     const onClose = (id) => {
         removeCharacter(id)
         setAvailableChars([...availableChars, Number(id)])
-        // removeFav(id)
     }
 
     return <>
@@ -84,7 +83,7 @@ function App({loggedUser, logUser, addCharacter, removeCharacter, getAllFavorite
         <Routes>
             <Route path='' element={<Form login={login}/>}/>
             <Route path='/home' element={<Cards onClose={onClose}/>}/>
-            <Route path='/favorites' element={<Favorites onClose={onClose}/>}/>
+            <Route path='/favorites' element={<Favorites onClose={null}/>}/>
             <Route path='/detail'><Route path=':id' element={<Detail/>}/></Route>
             <Route path='/about' element={<About/>}/>
         </Routes>
