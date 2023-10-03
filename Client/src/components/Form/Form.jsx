@@ -34,6 +34,7 @@ const Form = ({ login }) => {
     }
 
     return <>
+        <span className={style.credentials}>example@gmail.com | asd123</span>
         <div className={style.container}>
             <form onSubmit={handleSubmit} className={style.form}>
                 <h1 className={style.loginText}>Login</h1>
