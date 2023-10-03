@@ -1,8 +1,9 @@
 import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, LOG_USER, ADD_CHAR, REMOVE_CHAR, GET_ALL_FAV } from "./types";
 import axios from "axios";
+const domain = "https://rick-and-morty-api-tikr.onrender.com";
 
 export const getAllFavorites = (id) => {
-    const endpoint = "http://localhost:3001/rickandmorty/fav/getall"
+    const endpoint = `${domain}/rickandmorty/fav/getall`
     const user = { UserId: id }
     console.log(user)
     
@@ -20,7 +21,7 @@ export const getAllFavorites = (id) => {
 };
 
 export const addFav = (UserId, CharacterId) => {
-    const endpoint = "http://localhost:3001/rickandmorty/fav"
+    const endpoint = `${domain}/rickandmorty/fav`
     const user = { UserId, CharacterId }
 
     return function(dispatch){
@@ -37,7 +38,7 @@ export const addFav = (UserId, CharacterId) => {
 };
 
 export const removeFav = (UserId, CharacterId) => {
-    const endpoint = `http://localhost:3001/rickandmorty/fav?user=${UserId}&char=${CharacterId}`
+    const endpoint = `${domain}/rickandmorty/fav?user=${UserId}&char=${CharacterId}`
     console.log("ENDPOINT:", endpoint)
 
     return function(dispatch){
@@ -73,7 +74,7 @@ export const logUser = (id) => ({
 // Render characters
 export const addCharacter = (id) => {
     id = id.toString()
-    const endpoint = "http://localhost:3001/rickandmorty/character/" + id
+    const endpoint = `${domain}/rickandmorty/character/${id}`
 
     return function(dispatch){
         axios
