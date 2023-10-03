@@ -18,7 +18,7 @@ function App({loggedUser, logUser, addCharacter, removeCharacter, getAllFavorite
 
     const login = (userData) => {
         const { email, password } = userData
-        const URL = "http://localhost:3001/rickandmorty/login/"
+        const URL = "https://rick-and-morty-api-tikr.onrender.com/rickandmorty/login/"
 
         fetch(`${URL}?email=${email}&password=${password}`)
             .then(res => res.json())
